@@ -1,7 +1,8 @@
 import React from 'react';
+import Wrapper from '../../components/common/Wrapper';
 
 const MyGoals = () => {
-  return <div>MyGoals</div>;
+  return <Wrapper>MyGoals</Wrapper>;
 };
 
 export default MyGoals;

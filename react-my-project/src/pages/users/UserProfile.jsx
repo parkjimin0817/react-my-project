@@ -1,7 +1,8 @@
 import React from 'react';
+import Wrapper from '../../components/common/Wrapper';
 
 const UserProfile = () => {
-  return <div>UserProfile</div>;
+  return <Wrapper>UserProfile</Wrapper>;
 };
 
 export default UserProfile;

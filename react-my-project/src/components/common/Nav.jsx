@@ -15,12 +15,12 @@ const Nav = () => {
       </div>
       <MenuList>
         <UserBox>
-          <StyledLink to="/user">로그인</StyledLink>
-          <StyledLink to="/user/signin">회원가입</StyledLink>
+          <StyledLink to="/user">Log In</StyledLink> |
+          <StyledLink to="/user/signin">Sign In</StyledLink>
         </UserBox>
-        <StyledLink to="/">홈</StyledLink>
-        <StyledLink to="/about">소개</StyledLink>
-        <StyledLink to="/posts">게시판</StyledLink>
+        <StyledLink to="/">Home</StyledLink>
+        <StyledLink to="/about">About</StyledLink>
+        <StyledLink to="/posts">Community</StyledLink>
       </MenuList>
       <div>
         <button onClick={toggleTheme}>{theme === 'dark' ? '🌙 다크모드' : '🌞 라이트모드'}</button>
@@ -50,6 +50,8 @@ const StyledLink = styled(Link)`
 `;
 const UserBox = styled.div`
   width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
 `;
 const MenuList = styled.div`
   display: flex;

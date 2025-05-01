@@ -6,14 +6,15 @@ import Wrapper from '../../components/common/Wrapper';
 const Login = () => {
   return (
     <Wrapper>
+      <h2>Log In</h2>
       <LoginForm>
-        <Lable>아이디</Lable>
+        <Lable>ID</Lable>
         <Input type="text" />
 
-        <Lable>비밀번호</Lable>
+        <Lable>PASSWORD</Lable>
         <Input type="password" />
 
-        <Button color="tomato">로그인</Button>
+        <Button color="tomato">Log In</Button>
       </LoginForm>
     </Wrapper>
   );

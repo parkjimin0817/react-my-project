@@ -1,7 +1,8 @@
 import React from 'react';
+import Wrapper from '../../components/common/Wrapper';
 
 const PostList = () => {
-  return <div>PostList</div>;
+  return <Wrapper>PostList</Wrapper>;
 };
 
 export default PostList;

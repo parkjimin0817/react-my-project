@@ -17,7 +17,7 @@ const SignInForm = styled.div`
   flex-direction: column;
   align-items: center;
   width: 400px;
-  height: 700px;
+  height: 600px;
   padding: 10px;
   border: 1px solid lightblue;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './theme';
+import GlobalStyle from './GlobalStyle';
+import useThemeStore from './store/ThemeStore';
+import Nav from './components/common/Nav';
+import './App.css';
+import Home from './pages/Home';
+import About from './pages/About';
+import Login from './pages/users/Login';
+import SignIn from './pages/users/SignIn';
+import PostList from './pages/posts/PostList';
+import UserProfile from './pages/users/UserProfile';
+import PostDetail from './pages/posts/PostDetail';
+import CreateGoal from './pages/activity/CreateGoal';
+import GoalDetail from './pages/activity/GoalDetail';
+import MyGoals from './pages/activity/MyGoals';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { theme } = useThemeStore();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/user" element={<Login />} />
+          <Route path="/user/signin" element={<SignIn />} />
+          <Route path="/user/:id" element={<UserProfile />} />
+          <Route path="/posts" element={<PostList />} />
+          <Route path="/posts/:postNo" element={<PostDetail />} />
+          <Route path="/goals/:id" element={<MyGoals />} />
+          <Route path="/goals/create" element={<CreateGoal />} />
+          <Route path="/goals/:goalNo" element={<GoalDetail />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;

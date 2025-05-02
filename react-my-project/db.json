@@ -1,34 +1,104 @@
 {
   "users": [
-    { "userId": "user01", "name": "홍길동", "email": "hong@example.com", "password": "12345" },
-    { "userId": "user02", "name": "김철수", "email": "kim@example.com", "password": "12345" }
+    {
+      "userId": "user01",
+      "name": "홍길동",
+      "email": "hong@example.com",
+      "password": "12345"
+    },
+    {
+      "userId": "user02",
+      "name": "김철수",
+      "email": "kim@example.com",
+      "password": "12345"
+    },
+    {
+      "id": "b3e6",
+      "userId": "0101",
+      "name": "박지민",
+      "email": "0101@naver.com",
+      "password": "12345"
+    },
+    {
+      "id": "ffa4",
+      "userId": "0101",
+      "name": "박지민",
+      "email": "0101@naver.com",
+      "password": "0101"
+    }
   ],
   "posts": [
-    { "no": 1, "userId": "user01", "title": "오늘도 화이팅", "content": "맛있는거 먹고 힘내요" },
-    { "no": 2, "userId": "user02", "title": "재밌는 책 추천해주세요", "content": "미스테리 소설 추천바다요 ~" }
-  ],
-  "reply": [
-    { "no": 1, "postNo": "1", "userId": "user01", "reply": "오늘 떡볶이를 먹어야지~" },
-    { "no": 2, "postNo": "2", "userId": "user02", "reply": "셜록 홈즈 재밌어요! 강추!" }
-  ],
-
-  "goals": [
     {
       "no": 1,
       "userId": "user01",
-      "goalTitle": "영어 단어 외우기",
-      "goalDescription": "하루에 20개의 영어 단어를 외운다",
-      "startDate": "2025-05-01",
-      "frequency": "daily",
-      "status": "progress"
+      "title": "오늘도 화이팅",
+      "content": "맛있는거 먹고 힘내요",
+      "img": "/Img/dogwalk.jpg"
     },
     {
       "no": 2,
       "userId": "user02",
-      "goalTitle": "책 읽기",
+      "title": "재밌는 책 추천해주세요",
+      "content": "미스테리 소설 추천바다요 ~",
+      "img": "/Img/dogwalk.jpg"
+    },
+    {
+      "no": 3,
+      "userId": "user02",
+      "title": "재밌는 책 추천해주세요",
+      "content": "미스테리 소설 추천바다요 ~",
+      "img": "/Img/dogwalk.jpg"
+    }
+  ],
+  "reply": [
+    {
+      "no": 1,
+      "postNo": "1",
+      "userId": "user01",
+      "reply": "오늘 떡볶이를 먹어야지~"
+    },
+    {
+      "no": 2,
+      "postNo": "2",
+      "userId": "user02",
+      "reply": "셜록 홈즈 재밌어요! 강추!"
+    }
+  ],
+  "goals": [
+    {
+      "no": 1,
+      "userId": "user01",
+      "goalTitle": "영어 단어 외우기1",
+      "goalDescription": "하루에 20개의 영어 단어를 외운다",
+      "startDate": "2025-05-01",
+      "frequency": "DAILY",
+      "status": "progress"
+    },
+    {
+      "no": 2,
+      "userId": "user01",
+      "goalTitle": "영어 단어 외우기2",
+      "goalDescription": "하루에 20개의 영어 단어를 외운다",
+      "startDate": "2025-05-01",
+      "frequency": "MONTHLY",
+      "status": "progress"
+    },
+    {
+      "no": 3,
+      "userId": "user01",
+      "goalTitle": "영어 단어 외우기3",
+      "goalDescription": "하루에 20개의 영어 단어를 외운다",
+      "startDate": "2025-05-01",
+      "frequency": "WEEKLY",
+      "status": "progress"
+    },
+    {
+      "no": 4,
+      "userId": "user02",
+      "goalTitle": "책 읽기4",
       "goalDescription": "한 달에 한 권의 책을 읽는다",
       "startDate": "2025-05-01",
-      "frequency": "monthly",
+      "frequency": "MONTHLY",
       "status": "completed"
     }
   ]

@@ -15,6 +15,7 @@ import PostDetail from './pages/posts/PostDetail';
 import CreateGoal from './pages/activity/CreateGoal';
 import GoalDetail from './pages/activity/GoalDetail';
 import MyGoals from './pages/activity/MyGoals';
+import Header from './components/common/Header';
 
 function App() {
   const { theme } = useThemeStore();
@@ -23,6 +24,7 @@ function App() {
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <GlobalStyle />
       <BrowserRouter>
+        <Header />
         <Nav />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -32,7 +34,7 @@ function App() {
           <Route path="/user/:id" element={<UserProfile />} />
           <Route path="/posts" element={<PostList />} />
           <Route path="/posts/:postNo" element={<PostDetail />} />
-          <Route path="/goals/:id" element={<MyGoals />} />
+          <Route path="/goals" element={<MyGoals />} />
           <Route path="/goals/create" element={<CreateGoal />} />
           <Route path="/goals/:goalNo" element={<GoalDetail />} />
         </Routes>

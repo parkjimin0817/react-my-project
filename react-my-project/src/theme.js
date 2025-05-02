@@ -13,3 +13,11 @@ export const darkTheme = {
   primary: '#9b59b5',
   nav: 'gray',
 };
+
+export const theme = {
+  nav: '#282c34', // 네비게이션 바 배경색
+  text: '#fff', // 텍스트 색
+  border: '#444', // 경계선 색
+  hoverBackground: '#575757', // hover시 배경색
+  hoverText: '#fff', // hover시 텍스트 색
+};

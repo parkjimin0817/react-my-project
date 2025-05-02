@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/common/Button';
 import Wrapper from '../../components/common/Wrapper';
+import Input from '../../components/common/Input';
+import useUserStore from '../../store/UserStore';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
+  const { login, error, currentUser } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await login(userId, password);
+    console.log(currentUser);
+    navigate(`/`);
+  };
+
   return (
     <Wrapper>
-      <h2>Log In</h2>
-      <LoginForm>
-        <Lable>ID</Lable>
-        <Input type="text" />
-
-        <Lable>PASSWORD</Lable>
-        <Input type="password" />
-
-        <Button color="tomato">Log In</Button>
-      </LoginForm>
+      <div>
+        <h2>Log In</h2>
+        <LoginForm onSubmit={handleSubmit}>
+          <Lable>ID</Lable>
+          <Input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
+          <Lable>PASSWORD</Lable>
+          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          {error && <Error>{error}</Error>}
+          <Button type="submit" color="tomato">
+            Log In
+          </Button>
+        </LoginForm>
+      </div>
     </Wrapper>
   );
 };
@@ -39,11 +57,4 @@ const Lable = styled.label`
   width: 200px;
   font-size: 18px;
   padding: 20px 0 0 0;
-`;
-
-const Input = styled.input`
-  width: 200px;
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 4px;
 `;

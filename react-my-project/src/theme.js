@@ -4,7 +4,8 @@ export const lightTheme = {
   background: '#ffffff',
   text: '#222222',
   primary: '#3498db',
-  nav: 'lightblue',
+  nav: 'white',
+  searchbar: '#0aceff',
 };
 
 export const darkTheme = {
@@ -12,6 +13,7 @@ export const darkTheme = {
   text: '#f1f1f1',
   primary: '#9b59b5',
   nav: 'gray',
+  searchbar:'#757575',
 };
 
 export const theme = {

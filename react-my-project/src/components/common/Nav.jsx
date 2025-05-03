@@ -12,9 +12,6 @@ const Nav = () => {
   };
   return (
     <NavBar>
-      <div>
-        <GoGoal size={50} color="tomato" />
-      </div>
       <MenuList>
         <UserBox>
           {currentUser === null ? (
@@ -43,28 +40,28 @@ export default Nav;
 
 const NavBar = styled.div`
   position: fixed;
-  top: 0;
+  top:70px;
   left: 0;
-  width: 100%;
-  max-width: 250px;
-  height: 100%;
-  padding: 20px;
   display: flex;
-  flex-direction: column;
-  border-right: 1px solid black;
+  justify-content: space-around;
+  width: 100%;
+  height: 40px;
   background: ${({ theme }) => theme.nav};
 `;
 const StyledLink = styled(Link)`
+  width: 100px;
   font-size: 18px;
-  padding: 10px 10px 10px 10px;
+  padding: 10px;
 `;
 const UserBox = styled.div`
-  width: 100%;
-  padding: 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  width: 20%;
+
 `;
 const MenuList = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  gap: 100px;
 `;

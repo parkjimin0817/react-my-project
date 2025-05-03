@@ -8,11 +8,10 @@ const Wrapper = ({ children }) => {
 export default Wrapper;
 
 const StyledWrapper = styled.div`
-  position: absolute;
-  top: 80px;
-  left: 250px;
-  right: 0;
-  bottom: 0;
+  position: fixed;
+  top: 110px;
+  width: 100%;
+  height: calc(100% - 110px);
 
   display: flex;
   flex-direction: column;

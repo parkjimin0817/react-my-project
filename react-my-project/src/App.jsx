@@ -16,6 +16,7 @@ import CreateGoal from './pages/activity/CreateGoal';
 import GoalDetail from './pages/activity/GoalDetail';
 import MyGoals from './pages/activity/MyGoals';
 import Header from './components/common/Header';
+import EditGoal from './pages/activity/EditGoal';
 
 function App() {
   const { theme } = useThemeStore();
@@ -36,7 +37,8 @@ function App() {
           <Route path="/posts/:postNo" element={<PostDetail />} />
           <Route path="/goals" element={<MyGoals />} />
           <Route path="/goals/create" element={<CreateGoal />} />
-          <Route path="/goals/:goalNo" element={<GoalDetail />} />
+          <Route path="/goals/:id" element={<GoalDetail />} />
+          <Route path="/goals/edit/:id" element={<EditGoal />} /> 
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Wrapper from '../../components/common/Wrapper';
 import useGoalStore from '../../store/GoalStore';
 import useUserStore from '../../store/UserStore';
@@ -12,6 +12,7 @@ const MyGoals = () => {
   const { getMyGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
   const { currentUser } = useUserStore();
   const navigate = useNavigate();
+  const [selectedFrequency, setSelectedFrequency] = useState('');
 
   useEffect(() => {
     if (currentUser) {
@@ -19,9 +20,13 @@ const MyGoals = () => {
     }
   }, [currentUser]);
 
-  const handleGoalClick = (goalNo) => {
-    navigate(`/goals/${goalNo}`);
+  const handleGoalClick = (goalId) => {
+    navigate(`/goals/${goalId}`);
   };
+
+  const filteredGoals = selectedFrequency
+  ? goals.filter((goal) => goal.frequency === selectedFrequency)
+  : goals;
 
   if (goalsLoading) return <Loader />;
   if (goalsError) return <p>에러 발생: {goalsError}</p>;
@@ -29,10 +34,15 @@ const MyGoals = () => {
     <Wrapper>
       <MenuDiv>
         <SelectDiv>
-          <SelectFrequency name="frequency" id="">
-            <option value="">DAILY</option>
-            <option value="">WEEKLY</option>
-            <option value="">MONTHLY</option>
+        <SelectFrequency
+            name="frequency"
+            value={selectedFrequency}
+            onChange={(e) => setSelectedFrequency(e.target.value)}
+          >
+  <option value="">전체</option>
+  <option value="DAILY">DAILY</option>
+  <option value="WEEKLY">WEEKLY</option>
+  <option value="MONTHLY">MONTHLY</option>
           </SelectFrequency>
         </SelectDiv>
         <ButtonDiv>
@@ -41,12 +51,14 @@ const MyGoals = () => {
       </MenuDiv>
 
       <Container>
-        {!currentUser ? (
+      {!currentUser ? (
           <CheckLogin>로그인 후 확인해요!</CheckLogin>
-        ) : goals.length === 0 ? (
-          <p>아직 목표가 없어요!</p>
+        ) : filteredGoals.length === 0 ? (
+          <CheckLogin>해당 목표가 아직 없어요!</CheckLogin>
         ) : (
-          goals.map((goal) => <GoalCard key={goal.no} goal={goal} onClick={() => handleGoalClick(goal.no)} />)
+          filteredGoals.map((goal) => (
+            <GoalCard key={goal.id} goal={goal} onClick={() => handleGoalClick(goal.id)} />
+          ))
         )}
       </Container>
     </Wrapper>
@@ -77,12 +89,10 @@ const MenuDiv = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border: 1px solid black;
 `;
 
 const Container = styled.div`
   display: flex;
-  border: 1px solid black;
   width: 100%;
   height: calc(100% - 100px);
   padding: 30px;

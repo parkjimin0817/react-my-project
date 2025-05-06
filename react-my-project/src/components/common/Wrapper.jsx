@@ -9,12 +9,11 @@ export default Wrapper;
 
 const StyledWrapper = styled.div`
   position: fixed;
-  top: 110px;
+  top: 120px;
   width: 100%;
   height: calc(100% - 110px);
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid red;
 `;

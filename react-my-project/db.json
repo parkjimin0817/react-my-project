@@ -25,6 +25,13 @@
       "name": "박지민",
       "email": "0101@naver.com",
       "password": "0101"
+    },
+    {
+      "id": "d4f8",
+      "userId": "jimin",
+      "name": "박지민",
+      "email": "123@naver.com",
+      "password": "12345"
     }
   ],
   "posts": [
@@ -66,7 +73,7 @@
   ],
   "goals": [
     {
-      "no": 1,
+      "id": "1",
       "userId": "user01",
       "goalTitle": "영어 단어 외우기1",
       "goalDescription": "하루에 20개의 영어 단어를 외운다",
@@ -75,7 +82,7 @@
       "status": "progress"
     },
     {
-      "no": 2,
+      "id": "2",
       "userId": "user01",
       "goalTitle": "영어 단어 외우기2",
       "goalDescription": "하루에 20개의 영어 단어를 외운다",
@@ -84,7 +91,7 @@
       "status": "progress"
     },
     {
-      "no": 3,
+      "id": "3",
       "userId": "user01",
       "goalTitle": "영어 단어 외우기3",
       "goalDescription": "하루에 20개의 영어 단어를 외운다",
@@ -93,13 +100,31 @@
       "status": "progress"
     },
     {
-      "no": 4,
+      "id": "4",
       "userId": "user02",
       "goalTitle": "책 읽기4",
       "goalDescription": "한 달에 한 권의 책을 읽는다",
       "startDate": "2025-05-01",
       "frequency": "MONTHLY",
       "status": "completed"
+    },
+    {
+      "id": "d98c",
+      "userId": "user01",
+      "goalTitle": "인사잘하기",
+      "goalDescription": "친구들과 선생님에게 인사잘하기",
+      "startDate": "2025-05-12",
+      "frequency": "WEEKLY",
+      "status": "progress"
+    },
+    {
+      "id": "0f15",
+      "userId": "jimin",
+      "goalTitle": "ㄴㅇㄹ",
+      "goalDescription": "ㄴㅇㄹ",
+      "startDate": "2025-05-31",
+      "frequency": "WEEKLY",
+      "status": "progress"
     }
   ]
 }

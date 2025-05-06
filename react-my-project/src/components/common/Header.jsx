@@ -14,10 +14,11 @@ const Header = () => {
     <StyledHeader>
             <LogoDiv>
               <GoGoal size={40} color="tomato" />MakeGoal
+              <WelcomeDiv>{currentUser === null ? <h3>환영합니다</h3> : <h3>{currentUser.name}님 안녕하세요!</h3>}</WelcomeDiv>
             </LogoDiv>
-      <WelcomeDiv>{currentUser === null ? <h3>환영합니다</h3> : <h3>{currentUser.name}님 안녕하세요!</h3>}</WelcomeDiv>
+     
       <SearchDiv>
-        <SearchBar type="text" placeholder="게시글을 검색해보세요" />
+        <SearchBar type="text" placeholder="궁금한 이야기를 검색해보세요!" />
         <SearchButton>
           <CiSearch color="white" />
         </SearchButton>
@@ -36,7 +37,7 @@ const StyledHeader = styled.div`
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  /* justify-content: space-between; */
   width: 100%;
   height: 70px;
   background: ${({ theme }) => theme.nav};
@@ -45,20 +46,27 @@ const StyledHeader = styled.div`
 
 const LogoDiv = styled.div`
   display: flex;
+  color: tomato;
   align-items: center;
+  width: 30%;
   gap: 10px;
   padding-left: 15px;
-  color: tomato;
+
 `
 
 const WelcomeDiv = styled.div`
-  width: 30%;
+  padding-left: 40px;
+  color: black;
 `;
 
 const SearchDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
-  width: 30%;
+  width: 25%;
 `;
 
 const SearchBar = styled(Input)`
@@ -88,5 +96,7 @@ const SearchButton = styled.button`
 `;
 
 const ThemeDiv = styled.div`
-  width: 30%;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;

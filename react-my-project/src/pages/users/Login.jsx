@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/common/Button';
 import Wrapper from '../../components/common/Wrapper';
@@ -12,11 +12,16 @@ const Login = () => {
   const { login, error, currentUser } = useUserStore();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (currentUser) {
+      console.log('로그인 성공', currentUser);
+      navigate('/');  // 홈으로 리다이렉트
+    }
+  }, [currentUser, navigate]); // currentUser가 바뀔 때마다 실행
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(userId, password);
-    console.log(currentUser);
-    navigate(`/`);
+    await login(userId, password);  // 로그인 시도
   };
 
   return (

@@ -1,7 +1,8 @@
 import React from 'react';
+import Wrapper from '../../components/common/Wrapper';
 
 const PostDetail = () => {
-  return <div>PostDetail</div>;
+  return <Wrapper>PostDetail</Wrapper>;
 };
 
 export default PostDetail;

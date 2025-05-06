@@ -27,8 +27,8 @@ const Home = () => {
   const handlePostClick = (postNo) => {
     navigate(`/posts/${postNo}`);
   };
-  const handleGoalClick = (goalNo) => {
-    navigate(`/goals/${goalNo}`);
+  const handleGoalClick = (goalId) => {
+    navigate(`/goals/${goalId}`);
   };
 
   if (postsLoading) return <Loader />;
@@ -38,7 +38,7 @@ const Home = () => {
   if (goalsError) return <p>에러 발생: {goalsError}</p>;
 
   const displayedPosts = posts.slice(0, 3);
-  const displayedGoals = goals.filter((goal) => goal.userId === currentUser.userId);
+  const displayedGoals = goals.filter(goal => goal.userId && goal.userId === currentUser.userId).slice(0,3);
 
   return (
     <Wrapper>
@@ -59,7 +59,7 @@ const Home = () => {
           <CheckLogin>아직 목표가 없어요!</CheckLogin>
         ) : (
           displayedGoals.map((goal) => (
-            <Goal key={goal.no} style={{ marginBottom: '20px' }} onClick={() => handleGoalClick(goal.no)}>
+            <Goal key={goal.id} style={{ marginBottom: '20px' }} onClick={() => handleGoalClick(goal.id)}>
               <GoalTitle>{goal.goalTitle} </GoalTitle>
               <p>시작날짜 : {goal.startDate}</p>
               <GoalFrequency>{goal.frequency}</GoalFrequency>

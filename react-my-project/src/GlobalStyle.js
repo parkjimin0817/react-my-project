@@ -19,9 +19,6 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
-  a:hover {
-    text-decoration: underline;
-  }
 
 `;
 

@@ -1,20 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Wrapper from '../../components/common/Wrapper';
 import usePostStore from '../../store/PostStore';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../../components/common/Button';
 import useUserStore from '../../store/UserStore';
+import { useLocation } from 'react-router-dom';
 
 const PostList = () => {
   const { posts, isLoading, error, getPosts } = usePostStore();
   const { currentUser } = useUserStore();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   // 게시글 데이터를 가져오는 함수 호출
   useEffect(() => {
     getPosts();
   }, [getPosts]);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const searchQuery = queryParams.get('search')?.toLowerCase() || '';
+
+    if (searchQuery) {
+      setFilteredPosts(posts.filter((post) => post.title.toLowerCase().includes(searchQuery)));
+    } else {
+      setFilteredPosts(posts);
+    }
+  }, [location.search, posts]);
 
   const handlePostClick = (postId) => {
     navigate(`/posts/${postId}`);
@@ -36,7 +50,7 @@ const PostList = () => {
       )}
       <PostListContainer>
         <h2>게시글</h2>
-        {posts.length === 0 ? (
+        {filteredPosts.length === 0 ? (
           <p>게시글이 없습니다.</p>
         ) : (
           <PostTable>
@@ -47,7 +61,7 @@ const PostList = () => {
               </tr>
             </thead>
             <tbody>
-              {posts.map((post) => (
+              {filteredPosts.map((post) => (
                 <PostRow key={post.id} onClick={() => handlePostClick(post.id)}>
                   <TableCell>{post.title}</TableCell>
                   <TableCell>{post.userId}</TableCell>
@@ -73,6 +87,7 @@ const PostListContainer = styled.div`
 const PostTable = styled.table`
   width: 600px;
   border-collapse: collapse;
+  border-radius: 10px;
   margin-top: 20px;
 `;
 

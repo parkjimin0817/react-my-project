@@ -90,7 +90,8 @@ const MenuDiv = styled.div`
 
 const Container = styled.div`
   display: flex;
-  width: 100%;
+  flex-wrap: wrap;
+  width: 80%;
   height: calc(100% - 100px);
   padding: 30px;
 `;

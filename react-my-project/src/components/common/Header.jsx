@@ -1,25 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Input from './Input';
 import { CiSearch } from 'react-icons/ci';
 import { GoGoal } from 'react-icons/go';
 import useThemeStore from '../../store/ThemeStore';
 import useUserStore from '../../store/UserStore';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const { theme, toggleTheme } = useThemeStore();
+  const [searchQuery, setSearchQuery] = useState('');
   const { currentUser } = useUserStore();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.pathname.startsWith('/posts')) {
+      setSearchQuery('');
+    }
+  }, [location.pathname]);
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      // 공백 제거하고 소문자 변환 후 URL에 추가
+      const trimmedSearchQuery = searchQuery.trim().toLowerCase();
+      navigate(`/posts?search=${trimmedSearchQuery}`);
+      console.log(trimmedSearchQuery);
+    }
+  };
 
   return (
     <StyledHeader>
-            <LogoDiv>
-              <GoGoal size={40} color="tomato" />MakeGoal
-              <WelcomeDiv>{currentUser === null ? <h3>환영합니다</h3> : <h3>{currentUser.name}님 안녕하세요!</h3>}</WelcomeDiv>
-            </LogoDiv>
-     
+      <LogoDiv>
+        <GoGoal size={40} color="tomato" />
+        MakeGoal
+        <WelcomeDiv>
+          {currentUser === null ? <h3>환영합니다</h3> : <h3>{currentUser.name}님 안녕하세요!</h3>}
+        </WelcomeDiv>
+      </LogoDiv>
+
       <SearchDiv>
-        <SearchBar type="text" placeholder="궁금한 이야기를 검색해보세요!" />
-        <SearchButton>
+        <SearchBar
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
+          placeholder="궁금한 이야기를 검색해보세요!"
+        />
+        <SearchButton onClick={handleSearch}>
           <CiSearch color="white" />
         </SearchButton>
       </SearchDiv>
@@ -51,8 +83,7 @@ const LogoDiv = styled.div`
   width: 30%;
   gap: 10px;
   padding-left: 15px;
-
-`
+`;
 
 const WelcomeDiv = styled.div`
   padding-left: 40px;

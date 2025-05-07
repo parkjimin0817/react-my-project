@@ -4,15 +4,24 @@ import Wrapper from '../../components/common/Wrapper';
 import usePostStore from '../../store/PostStore';
 import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button';
+import useUserStore from '../../store/UserStore';
 
 const PostDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { postDetail, getPostDetail, isLoading, error } = usePostStore();
+  const { postDetail, getPostDetail, isLoading, error, deletePost } = usePostStore();
+  const { currentUser } = useUserStore();
 
   useEffect(() => {
     getPostDetail(id);
   }, [id]);
+
+  const handleDelete = async () => {
+    if (window.confirm('정말 이 게시물을 삭제하시겠습니까?')) {
+      await deletePost(id);
+      navigate('/posts');
+    }
+  };
 
   if (isLoading) return <Wrapper>로딩 중...</Wrapper>;
   if (error) return <Wrapper>오류 발생: {error}</Wrapper>;
@@ -31,23 +40,24 @@ const PostDetail = () => {
         </PostContent>
       </DetailWrapper>
 
-      <BackButtonWrapper>
+      <ButtonWrapper>
+        {currentUser && currentUser.userId === postDetail.userId && (
+          <DeleteButton onClick={handleDelete}>삭제</DeleteButton>
+        )}
         <GoList onClick={() => navigate('/posts')}>목록 가기</GoList>
-      </BackButtonWrapper>
+      </ButtonWrapper>
     </Wrapper>
   );
 };
 
 export default PostDetail;
 
-// 스타일 컴포넌트
-
 const DetailWrapper = styled.div`
   width: 100%;
   max-width: 800px;
   margin: 40px auto;
   display: flex;
-  flex-direction: row; // 사진과 글이 가로로 배치되도록 설정
+  flex-direction: row;
   align-items: flex-start;
   padding: 20px;
   background-color: #fff;
@@ -56,11 +66,11 @@ const DetailWrapper = styled.div`
 `;
 
 const PostImage = styled.img`
-  width: 200px; // 사진 크기 조정
-  height: 200px; // 정사각형
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 8px;
-  margin-right: 20px; // 사진과 글 사이 간격
+  margin-right: 20px;
 `;
 
 const PostContent = styled.div`
@@ -94,17 +104,27 @@ const Content = styled.p`
   white-space: pre-wrap;
 `;
 
-const BackButtonWrapper = styled.div`
-  width: 100%;
+const ButtonWrapper = styled.div`
+  width: 500px;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 const GoList = styled(Button)`
   background-color: #add8e690;
+  margin-left: 10px;
   color: black;
   &:hover {
     background-color: lightblue;
+  }
+`;
+
+const DeleteButton = styled(Button)`
+  background-color: #f44336;
+  margin-right: 10px;
+  color: white;
+  &:hover {
+    background-color: #d32f2f;
   }
 `;

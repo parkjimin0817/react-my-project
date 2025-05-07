@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { IoBookOutline } from "react-icons/io5";
-import { IoEarthOutline } from "react-icons/io5";
+import { IoBookOutline } from 'react-icons/io5';
+import { IoEarthOutline } from 'react-icons/io5';
 import useUserStore from '../../store/UserStore';
-import { GoHome } from "react-icons/go";
-import { FiTarget } from "react-icons/fi";
+import { GoHome } from 'react-icons/go';
+import { FiTarget } from 'react-icons/fi';
 
 const Nav = () => {
   const { currentUser, logout } = useUserStore();
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
     alert('로그아웃 되었습니다. 또 와야돼요!');
@@ -32,10 +33,22 @@ const Nav = () => {
           )}
         </UserBox>
         <MenuBox>
-        <StyledLink to="/"><GoHome />Home</StyledLink>
-        <StyledLink to="/about"><IoBookOutline />About</StyledLink>
-        <StyledLink to="/goals"><FiTarget />My Goals</StyledLink>
-        <StyledLink to="/posts"><IoEarthOutline />Community</StyledLink>
+          <StyledLink to="/">
+            <GoHome />
+            Home
+          </StyledLink>
+          <StyledLink to="/about">
+            <IoBookOutline />
+            About
+          </StyledLink>
+          <StyledLink to="/goals">
+            <FiTarget />
+            My Goals
+          </StyledLink>
+          <StyledLink to="/posts">
+            <IoEarthOutline />
+            Community
+          </StyledLink>
         </MenuBox>
       </MenuList>
     </NavBar>
@@ -46,7 +59,7 @@ export default Nav;
 
 const NavBar = styled.div`
   position: fixed;
-  top:70px;
+  top: 70px;
   left: 0;
   display: flex;
   justify-content: space-around;
@@ -55,7 +68,7 @@ const NavBar = styled.div`
   background: ${({ theme }) => theme.nav};
 `;
 const StyledLink = styled(Link)`
-color: #313131;
+  color: #313131;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,7 +77,7 @@ color: #313131;
   font-size: 18px;
   padding: 10px;
 
-  &:hover{
+  &:hover {
     color: black;
     font-weight: 700;
   }
@@ -73,7 +86,6 @@ const UserBox = styled.div`
   display: flex;
   align-items: center;
   width: 20%;
-
 `;
 const MenuBox = styled.div`
   display: flex;
@@ -82,7 +94,7 @@ const MenuBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`
+`;
 const MenuList = styled.div`
   display: flex;
   align-items: center;

@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-// ✅ yup 스키마 정의
 const schema = yup.object().shape({
   title: yup.string().required('제목을 입력하세요.'),
   content: yup.string().required('내용을 입력하세요.'),

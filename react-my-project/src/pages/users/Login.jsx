@@ -15,13 +15,23 @@ const Login = () => {
   useEffect(() => {
     if (currentUser) {
       console.log('로그인 성공', currentUser);
-      navigate('/');  // 홈으로 리다이렉트
+      navigate('/');
     }
-  }, [currentUser, navigate]); // currentUser가 바뀔 때마다 실행
+  }, [currentUser, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(userId, password);  // 로그인 시도
+
+    const success = await login(userId, password);
+
+    if (success) {
+      // currentUser는 useEffect에서 감지해서 이동 처리함
+      console.log('로그인 성공');
+    } else {
+      alert('아이디나 비밀번호가 옳지 않습니다. 다시 시도해 주세요.');
+      setUserId('');
+      setPassword('');
+    }
   };
 
   return (
@@ -33,7 +43,6 @@ const Login = () => {
           <Input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
           <Lable>PASSWORD</Lable>
           <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          {error && <Error>{error}</Error>}
           <Button type="submit" color="tomato">
             Log In
           </Button>

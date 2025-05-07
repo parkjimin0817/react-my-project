@@ -41,6 +41,13 @@
       "name": "홍길동",
       "email": "hong@naver.com",
       "password": "123456"
+    },
+    {
+      "id": "f2e2",
+      "userId": "jimin",
+      "name": "박지민",
+      "email": "jimin@naver.com",
+      "password": "123456"
     }
   ],
   "posts": [
@@ -75,6 +82,13 @@
       "content": "미스테리 소설 추천바다요 ~",
       "img": "/Img/dogwalk.jpg",
       "id": "63d2"
+    },
+    {
+      "id": "a716",
+      "userId": "jimin",
+      "title": "점심을 뭐먹을까 고민이에요",
+      "content": "여러분은 뭐먹어요>??? 전 라면을 먹을까 생각중이에요",
+      "img": "https://i.namu.wiki/i/2mrBrfSDXbBJHLjgyycsAhB0qLvjSZbvswmGtVTAupaEfuQ8Xuzp8wJiXyeDTsqz7blqGRYSjW5mbo1Wc4GP_w.webp"
     }
   ],
   "reply": [
@@ -104,22 +118,12 @@
       "status": "completed"
     },
     {
-      "id": "0f15",
-      "userId": "jimin",
-      "goalTitle": "ㄴㅇㄹ",
-      "goalDescription": "ㄴㅇㄹ",
-      "startDate": "2025-05-31",
-      "frequency": "WEEKLY",
-      "status": "progress"
-    },
-    {
-      "id": "3ddc",
-      "userId": "user0101",
       "goalTitle": "영어단어외우기",
-      "goalDescription": "하루에 20개 외우기",
+      "goalDescription": "20개 외우기",
       "startDate": "2025-05-19",
       "frequency": "DAILY",
-      "status": "progress"
+      "userId": "user0101",
+      "id": "3ddc"
     },
     {
       "goalTitle": "헬스장가기",
@@ -153,6 +157,67 @@
       "goalTitle": "영화관 가서 영화보기",
       "goalDescription": "영화관 가서 영화보고 팝콘 먹기",
       "startDate": "2025-06-07",
+      "frequency": "MONTHLY",
+      "status": "progress"
+    },
+    {
+      "goalTitle": "인스타 줄이기",
+      "goalDescription": "자기 전에 1시간만 하기 아니 사실 2시간 하기",
+      "startDate": "2025-05-08",
+      "frequency": "DAILY",
+      "userId": "jimin",
+      "id": "6891"
+    },
+    {
+      "id": "db84",
+      "userId": "jimin",
+      "goalTitle": "물2L 마시기",
+      "goalDescription": "물 많이 마시기 ",
+      "startDate": "2025-05-08",
+      "frequency": "DAILY",
+      "status": "progress"
+    },
+    {
+      "id": "7611",
+      "userId": "jimin",
+      "goalTitle": "책 읽기",
+      "goalDescription": "한달에 한권씩 책읽고 감상문 쓰기",
+      "startDate": "2025-06-01",
+      "frequency": "MONTHLY",
+      "status": "progress"
+    },
+    {
+      "id": "50d4",
+      "userId": "jimin",
+      "goalTitle": "침구 교체하기",
+      "goalDescription": "깨끗하게 빨고 건조하기",
+      "startDate": "2025-05-24",
+      "frequency": "WEEKLY",
+      "status": "progress"
+    },
+    {
+      "goalTitle": "kpt 매일 쓰기",
+      "goalDescription": "5분 이상 생각하고 정성스럽게 작성하기",
+      "startDate": "2025-05-08",
+      "frequency": "DAILY",
+      "userId": "jimin",
+      "id": "1e34"
+    },
+    {
+      "id": "4546",
+      "userId": "jimin",
+      "goalTitle": "발표 준비하기",
+      "goalDescription": "블로그 작성한거 중에 하나 발표 준비하기",
+      "startDate": "2025-05-12",
+      "frequency": "WEEKLY",
+      "status": "progress"
+    },
+    {
+      "id": "2287",
+      "userId": "user0101",
+      "goalTitle": "목표만들기",
+      "goalDescription": "매달 새로운 목표를 만들자",
+      "startDate": "2025-05-16",
       "frequency": "MONTHLY",
       "status": "progress"
     }

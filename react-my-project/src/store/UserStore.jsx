@@ -7,19 +7,21 @@ const useUserStore = create((set) => ({
   isLoading: false,
 
   login: async (userId, password) => {
-    set({ isLoading: true, error: null });
     try {
-      const response = await axios.get(`http://localhost:3001/users?userId=${userId}&password=${password}`);
-      
+      const response = await axios.get(`http://localhost:3001/users`, {
+        params: { userId, password },
+      });
+
       if (response.data.length > 0) {
-        set({ currentUser: response.data[0], error: null, isLoading: false });
-        // 상태 업데이트 후 currentUser는 React 상태 관리가 완료된 후 접근 가능
+        set({ currentUser: response.data[0], error: null });
+        return true;
       } else {
-        set({ error: '아이디 또는 비밀번호가 올바르지 않습니다.', isLoading: false });
+        set({ error: '로그인 실패', currentUser: null });
+        return false;
       }
     } catch (err) {
-      set({ error: err.message, isLoading: false });
-      console.log("에러 발생:", err.message); // 에러 메시지를 콘솔에 출력
+      set({ error: err.message, currentUser: null });
+      return false;
     }
   },
   signin: async (formData) => {

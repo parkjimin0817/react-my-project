@@ -24,8 +24,8 @@ const Home = () => {
     }
   }, []);
 
-  const handlePostClick = (postNo) => {
-    navigate(`/posts/${postNo}`);
+  const handlePostClick = (postId) => {
+    navigate(`/posts/${postId}`);
   };
   const handleGoalClick = (goalId) => {
     navigate(`/goals/${goalId}`);
@@ -38,14 +38,14 @@ const Home = () => {
   if (goalsError) return <p>에러 발생: {goalsError}</p>;
 
   const displayedPosts = posts.slice(0, 3);
-  const displayedGoals = goals.filter(goal => goal.userId && goal.userId === currentUser.userId).slice(0,3);
+  const displayedGoals = goals.filter((goal) => goal.userId && goal.userId === currentUser.userId).slice(0, 3);
 
   return (
     <Wrapper>
       <Div>
         <HomeSectionTitle>오늘의 게시글</HomeSectionTitle>
         {displayedPosts.map((post) => (
-          <Post key={post.no} style={{ marginBottom: '20px' }} onClick={() => handlePostClick(post.no)}>
+          <Post key={post.id} style={{ marginBottom: '20px' }} onClick={() => handlePostClick(post.id)}>
             <p>{post.title}</p>
             {post.img && <img src={post.img} alt="post" style={{ width: '200px', height: '200px' }} />}
           </Post>

@@ -4,13 +4,15 @@
       "userId": "user01",
       "name": "홍길동",
       "email": "hong@example.com",
-      "password": "12345"
+      "password": "12345",
+      "id": "6795"
     },
     {
       "userId": "user02",
       "name": "김철수",
       "email": "kim@example.com",
-      "password": "12345"
+      "password": "12345",
+      "id": "d367"
     },
     {
       "id": "b3e6",
@@ -32,29 +34,47 @@
       "name": "박지민",
       "email": "123@naver.com",
       "password": "12345"
+    },
+    {
+      "id": "61b0",
+      "userId": "user0101",
+      "name": "홍길동",
+      "email": "hong@naver.com",
+      "password": "123456"
     }
   ],
   "posts": [
+    {
+      "no": 5,
+      "userId": "user01",
+      "title": "오늘도 화이팅",
+      "content": "길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 길게 써봅시다 어떻게 되나요 ㅍ",
+      "img": "/Img/dogwalk.jpg",
+      "id": "1234"
+    },
     {
       "no": 1,
       "userId": "user01",
       "title": "오늘도 화이팅",
       "content": "맛있는거 먹고 힘내요",
-      "img": "/Img/dogwalk.jpg"
+      "img": "/Img/dogwalk.jpg",
+      "id": "6305"
     },
     {
       "no": 2,
       "userId": "user02",
       "title": "재밌는 책 추천해주세요",
       "content": "미스테리 소설 추천바다요 ~",
-      "img": "/Img/dogwalk.jpg"
+      "img": "/Img/dogwalk.jpg",
+      "id": "b08f"
     },
     {
       "no": 3,
       "userId": "user02",
       "title": "재밌는 책 추천해주세요",
       "content": "미스테리 소설 추천바다요 ~",
-      "img": "/Img/dogwalk.jpg"
+      "img": "/Img/dogwalk.jpg",
+      "id": "63d2"
     }
   ],
   "reply": [
@@ -62,43 +82,18 @@
       "no": 1,
       "postNo": "1",
       "userId": "user01",
-      "reply": "오늘 떡볶이를 먹어야지~"
+      "reply": "오늘 떡볶이를 먹어야지~",
+      "id": "6837"
     },
     {
       "no": 2,
       "postNo": "2",
       "userId": "user02",
-      "reply": "셜록 홈즈 재밌어요! 강추!"
+      "reply": "셜록 홈즈 재밌어요! 강추!",
+      "id": "6427"
     }
   ],
   "goals": [
-    {
-      "id": "1",
-      "userId": "user01",
-      "goalTitle": "영어 단어 외우기1",
-      "goalDescription": "하루에 20개의 영어 단어를 외운다",
-      "startDate": "2025-05-01",
-      "frequency": "DAILY",
-      "status": "progress"
-    },
-    {
-      "id": "2",
-      "userId": "user01",
-      "goalTitle": "영어 단어 외우기2",
-      "goalDescription": "하루에 20개의 영어 단어를 외운다",
-      "startDate": "2025-05-01",
-      "frequency": "MONTHLY",
-      "status": "progress"
-    },
-    {
-      "id": "3",
-      "userId": "user01",
-      "goalTitle": "영어 단어 외우기3",
-      "goalDescription": "하루에 20개의 영어 단어를 외운다",
-      "startDate": "2025-05-01",
-      "frequency": "WEEKLY",
-      "status": "progress"
-    },
     {
       "id": "4",
       "userId": "user02",
@@ -109,21 +104,56 @@
       "status": "completed"
     },
     {
-      "id": "d98c",
-      "userId": "user01",
-      "goalTitle": "인사잘하기",
-      "goalDescription": "친구들과 선생님에게 인사잘하기",
-      "startDate": "2025-05-12",
-      "frequency": "WEEKLY",
-      "status": "progress"
-    },
-    {
       "id": "0f15",
       "userId": "jimin",
       "goalTitle": "ㄴㅇㄹ",
       "goalDescription": "ㄴㅇㄹ",
       "startDate": "2025-05-31",
       "frequency": "WEEKLY",
+      "status": "progress"
+    },
+    {
+      "id": "3ddc",
+      "userId": "user0101",
+      "goalTitle": "영어단어외우기",
+      "goalDescription": "하루에 20개 외우기",
+      "startDate": "2025-05-19",
+      "frequency": "DAILY",
+      "status": "progress"
+    },
+    {
+      "goalTitle": "헬스장가기",
+      "goalDescription": "화, 목 헬스장 가서 운동하기",
+      "startDate": "2025-06-02",
+      "frequency": "WEEKLY",
+      "userId": "user0101",
+      "id": "8db0"
+    },
+    {
+      "id": "6c16",
+      "userId": "user0101",
+      "goalTitle": "강아지 산책하기",
+      "goalDescription": "아침에 일찍 일어나서 강아지 산책 30분",
+      "startDate": "2025-05-11",
+      "frequency": "DAILY",
+      "status": "progress"
+    },
+    {
+      "id": "2f0b",
+      "userId": "user0101",
+      "goalTitle": "책읽기",
+      "goalDescription": "100페이지 이상 책 골라서 읽고 감상문 쓰기",
+      "startDate": "2025-06-01",
+      "frequency": "MONTHLY",
+      "status": "progress"
+    },
+    {
+      "id": "02f0",
+      "userId": "user0101",
+      "goalTitle": "영화관 가서 영화보기",
+      "goalDescription": "영화관 가서 영화보고 팝콘 먹기",
+      "startDate": "2025-06-07",
+      "frequency": "MONTHLY",
       "status": "progress"
     }
   ]

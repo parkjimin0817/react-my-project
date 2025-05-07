@@ -24,25 +24,24 @@ const MyGoals = () => {
     navigate(`/goals/${goalId}`);
   };
 
-  const filteredGoals = selectedFrequency
-  ? goals.filter((goal) => goal.frequency === selectedFrequency)
-  : goals;
+  const filteredGoals = selectedFrequency ? goals.filter((goal) => goal.frequency === selectedFrequency) : goals;
 
   if (goalsLoading) return <Loader />;
   if (goalsError) return <p>에러 발생: {goalsError}</p>;
+
   return (
     <Wrapper>
       <MenuDiv>
         <SelectDiv>
-        <SelectFrequency
+          <SelectFrequency
             name="frequency"
             value={selectedFrequency}
             onChange={(e) => setSelectedFrequency(e.target.value)}
           >
-  <option value="">전체</option>
-  <option value="DAILY">DAILY</option>
-  <option value="WEEKLY">WEEKLY</option>
-  <option value="MONTHLY">MONTHLY</option>
+            <option value="">전체</option>
+            <option value="DAILY">DAILY</option>
+            <option value="WEEKLY">WEEKLY</option>
+            <option value="MONTHLY">MONTHLY</option>
           </SelectFrequency>
         </SelectDiv>
         <ButtonDiv>
@@ -51,14 +50,12 @@ const MyGoals = () => {
       </MenuDiv>
 
       <Container>
-      {!currentUser ? (
+        {!currentUser ? (
           <CheckLogin>로그인 후 확인해요!</CheckLogin>
         ) : filteredGoals.length === 0 ? (
           <CheckLogin>해당 목표가 아직 없어요!</CheckLogin>
         ) : (
-          filteredGoals.map((goal) => (
-            <GoalCard key={goal.id} goal={goal} onClick={() => handleGoalClick(goal.id)} />
-          ))
+          filteredGoals.map((goal) => <GoalCard key={goal.id} goal={goal} onClick={() => handleGoalClick(goal.id)} />)
         )}
       </Container>
     </Wrapper>

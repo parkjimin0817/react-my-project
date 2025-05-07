@@ -12,8 +12,8 @@ const useGoalStore = create((set) => ({
     try {
       const response = await axios.get('http://localhost:3001/goals');
       set({ goals: response.data, isLoading: false });
-    } catch (err) {
-      set({ error: err.msg, isLoading: false });
+    } catch (error) {
+      set({ error: error.response?.data?.message || error.message, isLoading: false });
     }
   },
 
@@ -23,14 +23,14 @@ const useGoalStore = create((set) => ({
     try {
       const response = await axios.get(`http://localhost:3001/goals?userId=${userId}`);
       set({ goals: response.data, isLoading: false });
-    } catch (err) {
-      set({ error: err.msg, isLoading: false });
+    } catch (error) {
+      set({ error: error.response?.data?.message || error.message, isLoading: false });
     }
   },
 
   postMyGoals: async (formData) => {
     set({ isLoading: true, error: null });
-  
+
     try {
       const response = await axios.post('http://localhost:3001/goals', {
         userId: formData.userId,
@@ -38,7 +38,7 @@ const useGoalStore = create((set) => ({
         goalDescription: formData.content,
         startDate: formData.date,
         frequency: formData.frequency,
-        status: 'progress' // 이 필드가 DB에 필요해 보이니까 추가
+        status: 'progress', // 이 필드가 DB에 필요해 보이니까 추가
       });
       set({ isLoading: false, error: null });
       return response.data; // 🔥 생성된 목표 객체 반환
@@ -48,14 +48,13 @@ const useGoalStore = create((set) => ({
     }
   },
 
-  // getGoalById 함수를 set 객체 내에 포함
   getGoalById: async (id) => {
     try {
       const response = await axios.get(`http://localhost:3001/goals/${id}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching goal:', error);
-      return null; // 에러가 나면 null 반환
+      return null;
     }
   },
 
@@ -66,13 +65,11 @@ const useGoalStore = create((set) => ({
       const response = await axios.put(`http://localhost:3001/goals/${id}`, updatedData);
       if (response.data) {
         set((state) => ({
-          goals: state.goals.map((goal) =>
-            goal.id === id ? response.data : goal
-          ),
+          goals: state.goals.map((goal) => (goal.id.toString() === id.toString() ? response.data : goal)),
         }));
       }
       set({ isLoading: false });
-      return response.data; // 업데이트된 목표 반환
+      return response.data;
     } catch (error) {
       set({ error: error.message, isLoading: false });
       console.error('Goal update failed', error);
@@ -90,7 +87,6 @@ const useGoalStore = create((set) => ({
       set({ error: error.message });
     }
   },
-
 }));
 
 export default useGoalStore;

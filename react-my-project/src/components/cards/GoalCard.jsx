@@ -5,7 +5,7 @@ const GoalCard = ({ goal, onClick }) => {
   return (
     <Goal onClick={onClick} key={goal.id}>
       <GoalTitle>{goal.goalTitle} </GoalTitle>
-      <p>시작날짜 : {goal.startDate}</p>
+      <p>시작-날짜 : {goal.startDate}</p>
       <GoalFrequency>{goal.frequency}</GoalFrequency>
     </Goal>
   );

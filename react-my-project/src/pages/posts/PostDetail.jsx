@@ -22,7 +22,6 @@ const PostDetail = () => {
       navigate('/posts');
     }
   };
-
   if (isLoading) return <Wrapper>로딩 중...</Wrapper>;
   if (error) return <Wrapper>오류 발생: {error}</Wrapper>;
   if (!postDetail) return <Wrapper>게시글이 없습니다.</Wrapper>;

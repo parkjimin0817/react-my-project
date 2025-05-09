@@ -27,6 +27,7 @@ const Home = () => {
   const handlePostClick = (postId) => {
     navigate(`/posts/${postId}`);
   };
+
   const handleGoalClick = (goalId) => {
     navigate(`/goals/${goalId}`);
   };

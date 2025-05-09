@@ -33,7 +33,7 @@ const Home = () => {
   };
 
   if (postsLoading) return <Loader />;
-  if (postsError) return <p>에러 발생: {postsError}</p>;
+  if (postsError) return <p>에러aa 발생: {postsError}</p>;
 
   if (goalsLoading) return <Loader />;
   if (goalsError) return <p>에러 발생: {goalsError}</p>;

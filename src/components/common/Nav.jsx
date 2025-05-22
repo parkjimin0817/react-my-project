@@ -10,6 +10,7 @@ import { FiTarget } from 'react-icons/fi';
 const Nav = () => {
   const { currentUser, logout } = useUserStore();
   const navigate = useNavigate();
+  
   const handleLogout = () => {
     logout();
     alert('로그아웃 되었습니다. 또 와야돼요!');

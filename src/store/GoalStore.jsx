@@ -38,10 +38,9 @@ const useGoalStore = create((set) => ({
         goalDescription: formData.content,
         startDate: formData.date,
         frequency: formData.frequency,
-        status: 'progress', // 이 필드가 DB에 필요해 보이니까 추가
       });
       set({ isLoading: false, error: null });
-      return response.data; // 🔥 생성된 목표 객체 반환
+      return response.data;
     } catch (error) {
       set({ isLoading: false, error: error.message });
       return null;

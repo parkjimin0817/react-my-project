@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
-  const { login, error, currentUser } = useUserStore();
+  const { login, currentUser } = useUserStore();
   const navigate = useNavigate();
 
   useEffect(() => {

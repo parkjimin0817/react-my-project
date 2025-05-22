@@ -3,6 +3,7 @@ import Wrapper from '../../components/common/Wrapper';
 import styled from 'styled-components';
 import Input from '../../components/common/Input';
 import useUserStore from '../../store/UserStore';
+import Button from '../../components/common/Button';
 
 const MyPage = () => {
   const { currentUser } = useUserStore();
@@ -13,19 +14,26 @@ const MyPage = () => {
     <Wrapper>
       <div>
         <h2>My Page</h2>
-        <MyPageForm>
-          <Label>Name</Label>
-          <Input type="text" value={currentUser?.name || ''} readOnly />
+        <MyPageDiv>
+          <Row>
+            <Label>Name</Label>
+            <ReadOnlyInput type="text" value={currentUser?.name || ''} readOnly />
+          </Row>
 
-          <Label>ID</Label>
-          <Input type="text" value={currentUser?.userId || ''} readOnly />
+          <Row>
+            <Label>ID</Label>
+            <ReadOnlyInput type="text" value={currentUser?.userId || ''} readOnly />
+          </Row>
 
-          <Label>E-MAIL</Label>
-          <Input type="email" value={currentUser?.email || ''} readOnly />
-          {/* 
-          <Label>PASSWORD</Label>
-          <Input type="password" value={currentUser?.password || ''} readOnly /> */}
-        </MyPageForm>
+          <Row>
+            <Label>E-MAIL</Label>
+            <ReadOnlyInput type="email" value={currentUser?.email || ''} readOnly />
+          </Row>
+
+          <ButtonRow>
+            <Button color="lightblue">내 정보 수정하기</Button>
+          </ButtonRow>
+        </MyPageDiv>
       </div>
     </Wrapper>
   );
@@ -33,28 +41,45 @@ const MyPage = () => {
 
 export default MyPage;
 
-const MyPageForm = styled.form`
+const MyPageDiv = styled.div`
+  width: 420px;
+  height: 320px;
+  padding: 30px 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+`;
+
+const Row = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  width: 400px;
-  height: auto;
-  padding: 10px;
-  border: 1px solid lightblue;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  padding: 18px 0;
+  border-bottom: 1px solid #eee;
+`;
+
+const ButtonRow = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 0;
 `;
 
 const Label = styled.label`
-  text-align: left;
-  width: 200px;
-  font-size: 18px;
-  padding: 20px 0 0 0;
+  font-weight: 600;
+  font-size: 17px;
+  color: #222;
+  width: 120px;
 `;
 
-const ErrorMsg = styled.p`
-  color: red;
-  font-size: 14px;
-  margin: 0;
+const ReadOnlyInput = styled(Input)`
+  border: none;
+  background-color: transparent;
+  font-size: 17px;
+  color: #444;
+  width: 260px;
   padding: 0;
+  pointer-events: none;
+  outline: none;
+  font-weight: 500;
 `;

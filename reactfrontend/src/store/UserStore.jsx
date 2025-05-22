@@ -8,7 +8,7 @@ const useUserStore = create((set) => ({
 
   login: async (userId, password) => {
     try {
-      const response = await axios.get(`http://localhost:3001/users`, {
+      const response = await axios.get(`http://localhost:8889/api/members`, {
         params: { userId, password },
       });
 
@@ -27,11 +27,11 @@ const useUserStore = create((set) => ({
   signin: async (formData) => {
     set({ isLoading: true, error: null });
     try {
-      await axios.post('http://localhost:3001/users', {
+      await axios.post('http://localhost:8889/api/members', {
         userId: formData.id,
-        name: formData.name,
+        userName: formData.name,
         email: formData.email,
-        password: formData.password,
+        userPwd: formData.password,
       });
       set({ isLoading: false, error: null });
     } catch (error) {

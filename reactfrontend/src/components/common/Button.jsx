@@ -12,7 +12,6 @@ const Button = ({ children, color, ...props }) => {
 export default Button;
 
 const StyledButton = styled.button`
-  margin: 20px 0 0 0;
   width: 200px;
   background: ${({ color }) => color};
 `;

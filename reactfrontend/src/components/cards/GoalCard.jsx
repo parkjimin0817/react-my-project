@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const GoalCard = ({ goal, onClick }) => {
   return (
-    <Goal onClick={onClick} key={goal.id}>
-      <GoalTitle>{goal.goalTitle} </GoalTitle>
-      <p>시작날짜 : {goal.startDate}</p>
+    <Goal onClick={onClick} key={goal.goal_no}>
+      <GoalTitle>{goal.goal_title} </GoalTitle>
+      <p>시작날짜 : {goal.start_date}</p>
       <GoalFrequency>{goal.frequency}</GoalFrequency>
     </Goal>
   );

@@ -1,6 +1,7 @@
 package com.kh.reactbackend.controller;
 
 import com.kh.reactbackend.dto.GoalDto;
+import com.kh.reactbackend.entity.Goal;
 import com.kh.reactbackend.entity.Member;
 import com.kh.reactbackend.repository.MemberRepository;
 import com.kh.reactbackend.service.GoalService;
@@ -11,6 +12,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@CrossOrigin (origins = "http://localhost:5175")
 @RestController
 @RequestMapping("/api/goals")
 @RequiredArgsConstructor
@@ -27,10 +32,8 @@ public class GoalController {
 
     //회원 목표 조회
     @GetMapping("/{userId}")
-    public ResponseEnity<PageResponse<GoalDto.Response>> getGoals(
-            @PageableDefault(size=5, sort="goalNo", direction = Sort.Direction.DESC)Pageable pageable,
-            @PathVariable String userId
-            ){
-
+    public ResponseEntity<List<GoalDto.Response>> getGoalsByUserId(@PathVariable String userId){
+        System.out.println(goalService.getGoalsByUserId(userId));
+        return ResponseEntity.ok(goalService.getGoalsByUserId(userId));
     }
 }

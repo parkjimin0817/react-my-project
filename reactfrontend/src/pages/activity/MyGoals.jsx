@@ -9,14 +9,14 @@ import Button from '../../components/common/Button';
 import GoalCard from '../../components/cards/GoalCard';
 
 const MyGoals = () => {
-  const { getMyGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
+  const { getMyGoals, goals } = useGoalStore();
   const { currentUser } = useUserStore();
   const navigate = useNavigate();
   const [selectedFrequency, setSelectedFrequency] = useState('');
 
   useEffect(() => {
     if (currentUser) {
-      getMyGoals(currentUser.userId);
+      getMyGoals(currentUser.user_id);
     }
   }, [currentUser]);
 
@@ -25,9 +25,6 @@ const MyGoals = () => {
   };
 
   const filteredGoals = selectedFrequency ? goals.filter((goal) => goal.frequency === selectedFrequency) : goals;
-
-  if (goalsLoading) return <Loader />;
-  if (goalsError) return <p>에러 발생: {goalsError}</p>;
 
   return (
     <Wrapper>
@@ -39,9 +36,9 @@ const MyGoals = () => {
             onChange={(e) => setSelectedFrequency(e.target.value)}
           >
             <option value="">전체</option>
-            <option value="DAILY">DAILY</option>
-            <option value="WEEKLY">WEEKLY</option>
-            <option value="MONTHLY">MONTHLY</option>
+            <option value="Daily">DAILY</option>
+            <option value="Weekly">WEEKLY</option>
+            <option value="Monthly">MONTHLY</option>
           </SelectFrequency>
         </SelectDiv>
         <ButtonDiv>
@@ -55,7 +52,9 @@ const MyGoals = () => {
         ) : filteredGoals.length === 0 ? (
           <CheckLogin>해당 목표가 아직 없어요!</CheckLogin>
         ) : (
-          filteredGoals.map((goal) => <GoalCard key={goal.id} goal={goal} onClick={() => handleGoalClick(goal.id)} />)
+          filteredGoals.map((goal) => (
+            <GoalCard key={goal.goal_no} goal={goal} onClick={() => handleGoalClick(goal.id)} />
+          ))
         )}
       </Container>
     </Wrapper>

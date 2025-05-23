@@ -51,9 +51,8 @@ public class GoalDto {
                     .goal_content(goal.getGoalContent())
                     .start_date(goal.getStartDate())
                     .frequency(goal.getFrequency())
-                    .
+                    .user_id(goal.getMember().getUserId())
+                    .build();
         }
-
-
     }
 }

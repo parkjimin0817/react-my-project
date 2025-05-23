@@ -17,11 +17,12 @@ const useGoalStore = create((set) => ({
     }
   },
 
-  getMyGoals: async (userId) => {
+  getMyGoals: async (user_id) => {
     set({ isLoading: true, error: null });
 
     try {
-      const response = await axios.get(`http://localhost:3001/goals?userId=${userId}`);
+      const response = await axios.get(`http://localhost:8889/api/goals/${user_id}`);
+      console.log('골 : ', response);
       set({ goals: response.data, isLoading: false });
     } catch (error) {
       set({ error: error.response?.data?.message || error.message, isLoading: false });
@@ -32,7 +33,7 @@ const useGoalStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       const res = await axios.post('http://localhost:8889/api/goals', {
-        user_id: formData.userId,
+        user_id: formData.user_id,
         goal_title: formData.title,
         goal_content: formData.content,
         start_date: formData.date,
@@ -42,6 +43,14 @@ const useGoalStore = create((set) => ({
       return { success: true, data: res.data };
     } catch (error) {
       const message = error.response?.data?.message || error.message;
+
+      console.error('목표 등록 실패!', {
+        message,
+        status: error.response?.status,
+        data: error.response?.data,
+        formData,
+      });
+
       set({ isLoading: false, error: message });
       return null;
     }

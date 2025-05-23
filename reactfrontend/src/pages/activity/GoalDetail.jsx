@@ -38,8 +38,6 @@ const GoalDetail = () => {
     }
   };
 
-  if (!goal) return <Wrapper>로딩 중...</Wrapper>;
-
   return (
     <Wrapper>
       <GoalDetailBox>

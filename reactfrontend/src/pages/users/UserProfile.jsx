@@ -17,12 +17,12 @@ const MyPage = () => {
         <MyPageDiv>
           <Row>
             <Label>Name</Label>
-            <ReadOnlyInput type="text" value={currentUser?.name || ''} readOnly />
+            <ReadOnlyInput type="text" value={currentUser?.user_name || ''} readOnly />
           </Row>
 
           <Row>
             <Label>ID</Label>
-            <ReadOnlyInput type="text" value={currentUser?.userId || ''} readOnly />
+            <ReadOnlyInput type="text" value={currentUser?.user_id || ''} readOnly />
           </Row>
 
           <Row>

@@ -35,7 +35,7 @@ const Header = () => {
         <GoGoal size={40} color="tomato" />
         MakeGoal
         <WelcomeDiv>
-          {currentUser === null ? <h3>환영합니다</h3> : <h3>{currentUser.name}님 안녕하세요!</h3>}
+          {currentUser === null ? <h3>환영합니다</h3> : <h3>{currentUser.user_name}님 안녕하세요!</h3>}
         </WelcomeDiv>
       </LogoDiv>
 

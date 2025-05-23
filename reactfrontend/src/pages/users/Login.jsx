@@ -1,36 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button';
 import Wrapper from '../../components/common/Wrapper';
 import Input from '../../components/common/Input';
 import useUserStore from '../../store/UserStore';
 import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const shcema = yup
+  .object({
+    userId: yup.string().required('아이디를 입력해주세요.'),
+    password: yup.string().required('비밀번호를 입력해주세요.'),
+  })
+  .required();
 
 const Login = () => {
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
-  const { login, currentUser } = useUserStore();
+  const { login, currentUser, error } = useUserStore();
   const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(shcema),
+    mode: 'onSubmit',
+  });
 
   useEffect(() => {
     if (currentUser) {
-      console.log('로그인 성공', currentUser);
       navigate('/');
     }
   }, [currentUser, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const success = await login(userId, password);
-
-    if (success) {
-      // currentUser는 useEffect에서 감지해서 이동 처리함
-      console.log('로그인 성공');
-    } else {
-      alert('아이디나 비밀번호가 옳지 않습니다. 다시 시도해 주세요.');
-      setUserId('');
-      setPassword('');
+  const onSubmit = async (data) => {
+    const success = await login(data.userId, data.password);
+    if (!success) {
+      alert(error || '아이디나 비밀번호가 옳지 않습니다. 다시 시도해주세요.');
+      reset();
     }
   };
 
@@ -38,11 +48,13 @@ const Login = () => {
     <Wrapper>
       <div>
         <h2>Log In</h2>
-        <LoginForm onSubmit={handleSubmit}>
-          <Lable>ID</Lable>
-          <Input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
-          <Lable>PASSWORD</Lable>
-          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <LoginForm onSubmit={handleSubmit(onSubmit)}>
+          <Label>ID</Label>
+          <Input type="text" {...register('userId')} />
+          <ErrorMsg $visible={!!errors.userId}>{errors.userId?.message || ' '}</ErrorMsg>
+          <Label>PASSWORD</Label>
+          <Input type="password" {...register('password')} />
+          <ErrorMsg $visible={!!errors.passowrd}>{errors.passowrd?.message || ' '}</ErrorMsg>
           <Button type="submit" color="tomato">
             Log In
           </Button>
@@ -66,9 +78,19 @@ const LoginForm = styled.form`
   border-radius: 10px;
 `;
 
-const Lable = styled.label`
+const Label = styled.label`
   text-align: left;
   width: 200px;
   font-size: 18px;
   padding: 20px 0 0 0;
+`;
+
+const ErrorMsg = styled.p`
+  display: block;
+  color: red;
+  font-size: 12px;
+  height: 15px; /* 적당한 높이 지정 */
+  margin: 0;
+  padding: 0;
+  visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
 `;

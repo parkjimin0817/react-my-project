@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -34,9 +35,12 @@ public class Goal {
     @Enumerated(EnumType.STRING)
     private CommonEnums.Frequency frequency;
 
+    @Column(name = "CREATE_DATE", updatable = false)
+    private LocalDateTime createDate;
+
     //Goal : Member (N : 1)
     @ManyToOne(fetch = FetchType.LAZY) //불필요한 연관 데이터 조회 방지
-    @JoinColumn(name = "GOAL_WRITER")
+    @JoinColumn(name = "USER_ID")
     private Member member;
 
 }

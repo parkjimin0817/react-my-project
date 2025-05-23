@@ -13,5 +13,6 @@ export default Button;
 
 const StyledButton = styled.button`
   width: 200px;
+  margin-top: 10px;
   background: ${({ color }) => color};
 `;

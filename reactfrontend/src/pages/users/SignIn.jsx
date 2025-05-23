@@ -1,4 +1,3 @@
-import React from 'react';
 import Wrapper from '../../components/common/Wrapper';
 import styled from 'styled-components';
 import Input from '../../components/common/Input';
@@ -21,7 +20,7 @@ const schema = yup.object().shape({
 });
 
 const SignIn = () => {
-  const { signin, error } = useUserStore();
+  const { signin } = useUserStore();
   const navigate = useNavigate();
 
   const {
@@ -35,11 +34,14 @@ const SignIn = () => {
   });
 
   const onSubmit = async (data) => {
-    await signin(data);
-    if (!error) {
-      alert('회원가입 완료');
+    const result = await signin(data);
+
+    if (result.success) {
+      alert(`${result.userId}님 회원가입이 완료되었습니다.`);
       reset();
       navigate('/user');
+    } else {
+      alert(`회원가입에 실패하였습니다 : ${result.message}`);
     }
   };
 

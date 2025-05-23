@@ -6,36 +6,41 @@ const useUserStore = create((set) => ({
   error: null,
   isLoading: false,
 
-  login: async (userId, password) => {
+  login: async (user_id, user_pwd) => {
     try {
-      const response = await axios.get(`http://localhost:8889/api/members`, {
-        params: { userId, password },
+      const res = await axios.post('http://localhost:8889/api/members/login', {
+        user_id,
+        user_pwd,
       });
-
-      if (response.data.length > 0) {
-        set({ currentUser: response.data[0], error: null });
+      if (res.data && res.data.user_id) {
+        console.log('여긴가 : ', res);
+        set({ currentUser: res.data, error: null });
         return true;
       } else {
-        set({ error: '로그인 실패', currentUser: null });
+        set({ error: '로그인 실패 : 사용자 정보가 없습니다.', currentUser: null });
         return false;
       }
-    } catch (err) {
-      set({ error: err.message, currentUser: null });
+    } catch (error) {
+      const message = error.response?.data?.message || error.message;
+      set({ error: message, currentUser: null });
       return false;
     }
   },
   signin: async (formData) => {
     set({ isLoading: true, error: null });
     try {
-      await axios.post('http://localhost:8889/api/members', {
-        userId: formData.id,
-        userName: formData.name,
+      const res = await axios.post('http://localhost:8889/api/members', {
+        user_id: formData.id,
+        user_name: formData.name,
         email: formData.email,
-        userPwd: formData.password,
+        user_pwd: formData.password,
       });
-      set({ isLoading: false, error: null });
+      set({ isLoading: false });
+      return { success: true, userId: res.data };
     } catch (error) {
-      set({ isLoading: false, error: error.message });
+      const message = error.response?.data?.message || error.message;
+      set({ isLoading: false, error: message });
+      return { success: false, message };
     }
   },
 

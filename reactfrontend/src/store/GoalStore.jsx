@@ -30,19 +30,19 @@ const useGoalStore = create((set) => ({
 
   postMyGoals: async (formData) => {
     set({ isLoading: true, error: null });
-
     try {
-      const response = await axios.post('http://localhost:3001/goals', {
-        userId: formData.userId,
-        goalTitle: formData.title,
-        goalDescription: formData.content,
-        startDate: formData.date,
+      const res = await axios.post('http://localhost:8889/api/goals', {
+        user_id: formData.userId,
+        goal_title: formData.title,
+        goal_content: formData.content,
+        start_date: formData.date,
         frequency: formData.frequency,
       });
-      set({ isLoading: false, error: null });
-      return response.data;
+      set({ isLoading: false });
+      return { success: true, data: res.data };
     } catch (error) {
-      set({ isLoading: false, error: error.message });
+      const message = error.response?.data?.message || error.message;
+      set({ isLoading: false, error: message });
       return null;
     }
   },

@@ -21,7 +21,7 @@ const useGoalStore = create((set) => ({
     set({ isLoading: true, error: null });
 
     try {
-      const response = await axios.get(`http://localhost:8889/api/goals/${user_id}`);
+      const response = await axios.get(`http://localhost:8889/api/goals/user/${user_id}`);
       console.log('골 : ', response);
       set({ goals: response.data, isLoading: false });
     } catch (error) {
@@ -56,9 +56,10 @@ const useGoalStore = create((set) => ({
     }
   },
 
-  getGoalById: async (id) => {
+  getGoalByGoalNo: async (goal_no) => {
     try {
-      const response = await axios.get(`http://localhost:3001/goals/${id}`);
+      const response = await axios.get(`http://localhost:8889/api/goals/${goal_no}`);
+      console.log("스토어 실행 성공")
       return response.data;
     } catch (error) {
       console.error('Error fetching goal:', error);

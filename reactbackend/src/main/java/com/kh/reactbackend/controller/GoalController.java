@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin (origins = "http://localhost:5175")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/goals")
 @RequiredArgsConstructor
@@ -31,9 +31,27 @@ public class GoalController {
     }
 
     //회원 목표 조회
-    @GetMapping("/{userId}")
-    public ResponseEntity<List<GoalDto.Response>> getGoalsByUserId(@PathVariable String userId){
-        System.out.println(goalService.getGoalsByUserId(userId));
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<GoalDto.Response>> getGoals(@PathVariable String userId){
         return ResponseEntity.ok(goalService.getGoalsByUserId(userId));
+    }
+
+    //목표 상세 조회
+    @GetMapping("/{goalNo}")
+    public ResponseEntity<GoalDto.Response> getGoal(@PathVariable Long goalNo){
+        return ResponseEntity.ok(goalService.getGoalDetail(goalNo));
+    }
+
+    //회원 목표 삭제
+    @DeleteMapping("/{goalNo}")
+    public ResponseEntity<Void> deleteGoal(@PathVariable Long goalNo){
+        goalService.deleteGoal(goalNo);
+        return ResponseEntity.ok().build();
+    }
+
+    //회원 목표 수정
+    @PatchMapping("/{goalNo}")
+    public ResponseEntity<GoalDto.Response> updateGoal(@PathVariable Long goalNo, @RequestBody GoalDto.Update updateDto){
+        return ResponseEntity.ok(goalService.updateGoal(goalNo));
     }
 }

@@ -31,6 +31,10 @@ public class GoalDto {
         }
     }
 
+    public static class Update {
+        private 
+    }
+
     @Getter
     @Setter
     @NoArgsConstructor

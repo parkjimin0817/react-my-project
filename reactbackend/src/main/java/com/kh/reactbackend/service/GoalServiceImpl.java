@@ -38,4 +38,17 @@ public class GoalServiceImpl implements GoalService {
                 .map(GoalDto.Response::toDto)
                 .collect(Collectors.toList());
     }
+
+    public void deleteGoal(Long goalNo) {
+        Goal goal = goalRepository.findByGoalNo(goalNo)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 목표입니다"));
+        goalRepository.delete(goal);
+    }
+
+    @Override
+    public GoalDto.Response getGoalDetail(Long goalNo) {
+        Goal goal = goalRepository.findByGoalNo(goalNo)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 목표입니다."));
+        return GoalDto.Response.toDto(goal);
+    }
 }

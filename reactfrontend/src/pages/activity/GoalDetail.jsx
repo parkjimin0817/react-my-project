@@ -7,21 +7,21 @@ import useGoalStore from '../../store/GoalStore';
 import performToast from '../../components/common/performToast';
 
 const GoalDetail = () => {
-  const { id } = useParams();
+  const { goal_no } = useParams();
   const navigate = useNavigate();
-  const { getGoalById, deleteGoal } = useGoalStore();
+  const { getGoalByGoalNo, deleteGoal } = useGoalStore();
 
   const [goal, setGoal] = useState(null);
 
   useEffect(() => {
     const fetchGoal = async () => {
-      const data = await getGoalById(id);
+      const data = await getGoalByGoalNo(goal_no);
       setGoal(data);
       console.log(data);
     };
 
     fetchGoal();
-  }, [id]);
+  }, [goal_no]);
 
   const handleDelete = async () => {
     // 삭제 전에 사용자에게 확인을 요청
@@ -41,14 +41,14 @@ const GoalDetail = () => {
   return (
     <Wrapper>
       <GoalDetailBox>
-        <DetailTitle>{goal.goalTitle}</DetailTitle>
+        <DetailTitle>{goal.goal_title}</DetailTitle>
         <DetailLabel>내용</DetailLabel>
-        <DetailContent>{goal.goalDescription}</DetailContent>
+        <DetailContent>{goal.goal_content}</DetailContent>
         <DetailLabel>시작 날짜</DetailLabel>
-        <DetailValue>{goal.startDate}</DetailValue>
+        <DetailValue>{goal.start_date}</DetailValue>
         <DetailLabel>주기</DetailLabel>
         <DetailValue>{goal.frequency || '주기 없음'}</DetailValue>
-        <DetailButton onClick={() => navigate(`/goals/edit/${goal.id}`)}>수정하기</DetailButton>
+        <DetailButton onClick={() => navigate(`/goals/edit/${goal_no}`)}>수정하기</DetailButton>
         <DeleteButton onClick={handleDelete}>삭제하기</DeleteButton>
       </GoalDetailBox>
       <BackButtonWrapper>

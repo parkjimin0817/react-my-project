@@ -20,9 +20,9 @@ const MyGoals = () => {
     }
   }, [currentUser]);
 
-  const handleGoalClick = (goalId) => {
-    navigate(`/goals/${goalId}`);
-  };
+  // const handleGoalClick = (goalId) => {
+  //   navigate(`/goals/${goalId}`);
+  // };
 
   const filteredGoals = selectedFrequency ? goals.filter((goal) => goal.frequency === selectedFrequency) : goals;
 
@@ -53,7 +53,7 @@ const MyGoals = () => {
           <CheckLogin>해당 목표가 아직 없어요!</CheckLogin>
         ) : (
           filteredGoals.map((goal) => (
-            <GoalCard key={goal.goal_no} goal={goal} onClick={() => handleGoalClick(goal.id)} />
+            <GoalCard key={goal.goal_no} goal={goal} onClick={() => navigate(`/goals/${goal.goal_no}`)} />
           ))
         )}
       </Container>

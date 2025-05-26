@@ -33,13 +33,13 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/user" element={<Login />} />
           <Route path="/user/signin" element={<SignIn />} />
-          <Route path="/user/:id" element={<UserProfile />} />
+          <Route path="/user/:user_id" element={<UserProfile />} />
           <Route path="/posts" element={<PostList />} />
           <Route path="/posts/:id" element={<PostDetail />} />
           <Route path="/posts/create" element={<CreatePost />} />
           <Route path="/goals" element={<MyGoals />} />
           <Route path="/goals/create" element={<CreateGoal />} />
-          <Route path="/goals/:id" element={<GoalDetail />} />
+          <Route path="/goals/:goal_no" element={<GoalDetail />} />
           <Route path="/goals/edit/:id" element={<EditGoal />} />
         </Routes>
       </BrowserRouter>

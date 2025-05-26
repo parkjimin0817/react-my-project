@@ -59,7 +59,7 @@ const useGoalStore = create((set) => ({
   getGoalByGoalNo: async (goal_no) => {
     try {
       const response = await axios.get(`http://localhost:8889/api/goals/${goal_no}`);
-      console.log("스토어 실행 성공")
+      console.log('스토어 실행 성공');
       return response.data;
     } catch (error) {
       console.error('Error fetching goal:', error);
@@ -85,12 +85,10 @@ const useGoalStore = create((set) => ({
       return null;
     }
   },
-  deleteGoal: async (id) => {
+  deleteGoal: async (goal_no) => {
     try {
-      await axios.delete(`http://localhost:3001/goals/${id}`);
-      set((state) => ({
-        goals: state.goals.filter((goal) => goal.id !== id),
-      }));
+      await axios.delete(`http://localhost:8889/api/goals/${goal_no}`);
+      console.log('삭제store실행');
     } catch (error) {
       console.error('Goal delete failed', error);
       set({ error: error.message });

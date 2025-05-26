@@ -6,6 +6,6 @@ public class CommonEnums {
     }
 
     public enum Frequency {
-       DAILY, WEEKLY, MONTHLY
+       Daily, Weekly, Monthly
     }
 }

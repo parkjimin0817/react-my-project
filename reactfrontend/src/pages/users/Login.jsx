@@ -39,7 +39,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     const success = await login(data.userId, data.password);
     if (!success) {
-      alert(error || '아이디나 비밀번호가 옳지 않습니다. 다시 시도해주세요.');
+      alert(error);
       reset();
     }
   };

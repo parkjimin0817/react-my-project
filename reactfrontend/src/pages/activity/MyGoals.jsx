@@ -20,10 +20,6 @@ const MyGoals = () => {
     }
   }, [currentUser]);
 
-  // const handleGoalClick = (goalId) => {
-  //   navigate(`/goals/${goalId}`);
-  // };
-
   const filteredGoals = selectedFrequency ? goals.filter((goal) => goal.frequency === selectedFrequency) : goals;
 
   return (

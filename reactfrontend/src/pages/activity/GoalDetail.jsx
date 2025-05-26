@@ -10,7 +10,6 @@ const GoalDetail = () => {
   const { goal_no } = useParams();
   const navigate = useNavigate();
   const { getGoalByGoalNo, deleteGoal } = useGoalStore();
-
   const [goal, setGoal] = useState(null);
 
   useEffect(() => {
@@ -24,19 +23,27 @@ const GoalDetail = () => {
   }, [goal_no]);
 
   const handleDelete = async () => {
-    // 삭제 전에 사용자에게 확인을 요청
-    const isConfirmed = window.confirm('정말 삭제하시겠습니까?');
+    if (!goal?.goal_no) return;
 
-    if (isConfirmed) {
-      if (goal?.id) {
-        await deleteGoal(goal.id);
-        performToast({ msg: '목표가 삭제되었습니다.', type: 'success' });
-        navigate('/goals');
+    try {
+      const confirmed = window.confirm('정말 삭제하시겠습니까?');
+      if (!confirmed) {
+        performToast({ msg: '삭제가 취소되었습니다.', type: 'info' });
+        return;
       }
-    } else {
-      performToast({ msg: '삭제가 취소되었습니다.', type: 'info' });
+
+      await deleteGoal(goal.goal_no);
+      performToast({ msg: '목표가 삭제되었습니다.', type: 'success' });
+      navigate('/goals');
+    } catch (error) {
+      console.error('삭제 중 오류 발생:', error);
+      performToast({ msg: '삭제에 실패했습니다. 다시 시도해주세요.', type: 'error' });
     }
   };
+
+  if (!goal) {
+    return <Wrapper>목표 정보를 불러오는 중입니다...</Wrapper>;
+  }
 
   return (
     <Wrapper>

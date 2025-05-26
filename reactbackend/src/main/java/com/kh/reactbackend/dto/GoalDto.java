@@ -31,9 +31,9 @@ public class GoalDto {
         }
     }
 
-    public static class Update {
-        private 
-    }
+//    public static class Update {
+//        private
+//    }
 
     @Getter
     @Setter

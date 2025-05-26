@@ -10,7 +10,7 @@ import { FiTarget } from 'react-icons/fi';
 const Nav = () => {
   const { currentUser, logout } = useUserStore();
   const navigate = useNavigate();
-  
+
   const handleLogout = () => {
     logout();
     alert('로그아웃 되었습니다. 또 와야돼요!');
@@ -29,7 +29,7 @@ const Nav = () => {
               <StyledLink to="/" onClick={handleLogout}>
                 Log Out
               </StyledLink>
-              |<StyledLink to={`/user/${currentUser.id}`}>My Page</StyledLink>
+              |<StyledLink to={`/user/${currentUser.user_id}`}>My Page</StyledLink>
             </>
           )}
         </UserBox>

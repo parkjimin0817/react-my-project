@@ -49,9 +49,9 @@ public class GoalController {
         return ResponseEntity.ok().build();
     }
 
-//    //회원 목표 수정
-//    @PatchMapping("/{goalNo}")
-//    public ResponseEntity<GoalDto.Response> updateGoal(@PathVariable Long goalNo, @RequestBody GoalDto.Update updateDto){
-//        return ResponseEntity.ok(goalService.updateGoal(goalNo));
-//    }
+    //회원 목표 수정
+    @PatchMapping("/{goalNo}")
+    public ResponseEntity<GoalDto.Response> updateGoal(@PathVariable Long goalNo, @RequestBody GoalDto.Update updateDto){
+        return ResponseEntity.ok(goalService.updateGoal(goalNo, updateDto));
+    }
 }

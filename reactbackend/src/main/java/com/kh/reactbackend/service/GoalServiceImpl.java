@@ -51,4 +51,12 @@ public class GoalServiceImpl implements GoalService {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 목표입니다."));
         return GoalDto.Response.toDto(goal);
     }
+
+    @Override
+    public GoalDto.Response updateGoal(Long goalNo, GoalDto.Update updateDto) {
+        Goal goal = goalRepository.findByGoalNo(goalNo)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 목표입니다."));
+        goal.updateGoal(updateDto); //편의 메서드를 통한 업데이트
+        return GoalDto.Response.toDto(goal); //dto로 변환해서 return
+    }
 }

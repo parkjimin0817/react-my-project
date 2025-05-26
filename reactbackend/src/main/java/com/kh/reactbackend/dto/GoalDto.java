@@ -31,9 +31,24 @@ public class GoalDto {
         }
     }
 
-//    public static class Update {
-//        private
-//    }
+    @Getter
+    @AllArgsConstructor
+    public static class Update {
+        private String goal_title;
+        private String goal_content;
+        private LocalDate start_date;
+        private CommonEnums.Frequency frequency;
+
+        public Goal toEntity(){
+            return Goal.builder()
+                    .goalTitle(this.goal_title)
+                    .goalContent(this.goal_content)
+                    .startDate(this.start_date)
+                    .frequency(this.frequency)
+                    .build();
+        }
+
+    }
 
     @Getter
     @Setter

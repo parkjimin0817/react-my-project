@@ -109,9 +109,9 @@ const EditGoal = () => {
         <Label>주기</Label>
         <Select {...register('frequency')}>
           <option value="">-- 선택하세요 --</option>
-          <option value="DAILY">DAILY</option>
-          <option value="WEEKLY">WEEKLY</option>
-          <option value="MONTHLY">MONTHLY</option>
+          <option value="Daily">DAILY</option>
+          <option value="Weekly">WEEKLY</option>
+          <option value="Monthly">MONTHLY</option>
         </Select>
         {errors.frequency && <ErrorMsg>{errors.frequency.message}</ErrorMsg>}
 

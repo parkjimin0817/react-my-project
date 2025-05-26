@@ -1,5 +1,6 @@
 package com.kh.reactbackend.entity;
 
+import com.kh.reactbackend.dto.GoalDto;
 import com.kh.reactbackend.enums.CommonEnums;
 import jakarta.persistence.*;
 import lombok.*;
@@ -42,5 +43,21 @@ public class Goal {
     @ManyToOne(fetch = FetchType.LAZY) //불필요한 연관 데이터 조회 방지
     @JoinColumn(name = "USER_ID")
     private Member member;
+
+    public void updateGoal(GoalDto.Update updateDto){
+        if(updateDto.getGoal_title() != null){
+            this.goalTitle = updateDto.getGoal_title();
+        }
+        if(updateDto.getGoal_content() != null){
+            this.goalContent = updateDto.getGoal_content();
+        }
+        if(updateDto.getStart_date() != null){
+            this.startDate = updateDto.getStart_date();
+        }
+        if(updateDto.getFrequency() != null){
+            this.frequency = updateDto.getFrequency();
+        }
+    }
+
 
 }

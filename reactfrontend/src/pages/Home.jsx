@@ -10,7 +10,7 @@ import useUserStore from '../store/UserStore';
 
 const Home = () => {
   const { getPosts, posts, isLoading: postsLoading, error: postsError } = usePostStore((state) => state);
-  const { getMyGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
+  const { getGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
   const { currentUser } = useUserStore();
   const navigate = useNavigate();
 
@@ -20,35 +20,37 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      getMyGoals(currentUser.user_id);
+      getGoals(currentUser.userId);
     }
-  }, [currentUser]);
+  }, []);
 
   const handlePostClick = (postId) => {
     navigate(`/posts/${postId}`);
   };
 
-  const handleGoalClick = (goal_no) => {
-    navigate(`/goals/${goal_no}`);
+  const handleGoalClick = (goalId) => {
+    navigate(`/goals/${goalId}`);
   };
 
+  if (postsLoading) return <Loader />;
+  if (postsError) return <p>에러aa 발생: {postsError}</p>;
+
+  if (goalsLoading) return <Loader />;
+  if (goalsError) return <p>에러 발생: {goalsError}</p>;
+
   const displayedPosts = posts.slice(0, 3);
-  const displayedGoals = goals.filter((goal) => goal.user_id && goal.user_id === currentUser.user_id).slice(0, 3);
+  const displayedGoals = goals.filter((goal) => goal.userId && goal.userId === currentUser.userId).slice(0, 3);
 
   return (
     <Wrapper>
       <Div>
         <HomeSectionTitle>오늘의 게시글</HomeSectionTitle>
-        {displayedPosts.length === 0 ? (
-          <CheckLogin>게시글이 없어요!</CheckLogin>
-        ) : (
-          displayedPosts.map((post) => (
-            <Post key={post.id} style={{ marginBottom: '20px' }} onClick={() => handlePostClick(post.id)}>
-              <p>{post.title}</p>
-              {post.img && <img src={post.img} alt="post" style={{ width: '200px', height: '200px' }} />}
-            </Post>
-          ))
-        )}
+        {displayedPosts.map((post) => (
+          <Post key={post.id} style={{ marginBottom: '20px' }} onClick={() => handlePostClick(post.id)}>
+            <p>{post.title}</p>
+            {post.img && <img src={post.img} alt="post" style={{ width: '200px', height: '200px' }} />}
+          </Post>
+        ))}
       </Div>
       <Div>
         <HomeSectionTitle>나의 목표</HomeSectionTitle>
@@ -58,9 +60,9 @@ const Home = () => {
           <CheckLogin>아직 목표가 없어요!</CheckLogin>
         ) : (
           displayedGoals.map((goal) => (
-            <Goal key={goal.goal_no} style={{ marginBottom: '20px' }} onClick={() => handleGoalClick(goal.goal_no)}>
-              <GoalTitle>{goal.goal_title} </GoalTitle>
-              <p>시작날짜 : {goal.start_date}</p>
+            <Goal key={goal.id} style={{ marginBottom: '20px' }} onClick={() => handleGoalClick(goal.id)}>
+              <GoalTitle>{goal.goalTitle} </GoalTitle>
+              <p>시작날짜 : {goal.startDate}</p>
               <GoalFrequency>{goal.frequency}</GoalFrequency>
             </Goal>
           ))

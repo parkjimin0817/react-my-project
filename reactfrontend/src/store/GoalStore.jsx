@@ -6,11 +6,11 @@ const useGoalStore = create((set) => ({
   isLoading: false,
   error: null,
 
-  getGoals: async (user_id) => {
+  getGoals: async () => {
     set({ isLoading: true, error: null });
 
     try {
-      const response = await axios.get(`http://localhost:8889/goals/user/${user_id}`);
+      const response = await axios.get('http://localhost:3001/goals');
       set({ goals: response.data, isLoading: false });
     } catch (error) {
       set({ error: error.response?.data?.message || error.message, isLoading: false });
@@ -60,7 +60,6 @@ const useGoalStore = create((set) => ({
     try {
       const response = await axios.get(`http://localhost:8889/api/goals/${goal_no}`);
       console.log('스토어 실행 성공');
-      console.log('goal_no:', goal_no);
       return response.data;
     } catch (error) {
       console.error('Error fetching goal:', error);
@@ -68,14 +67,14 @@ const useGoalStore = create((set) => ({
     }
   },
 
-  updateGoal: async (goal_no, updatedData) => {
+  updateGoal: async (id, updatedData) => {
     set({ isLoading: true, error: null });
 
     try {
-      const response = await axios.patch(`http://localhost:8889/api/goals/${goal_no}`, updatedData);
+      const response = await axios.put(`http://localhost:3001/goals/${id}`, updatedData);
       if (response.data) {
         set((state) => ({
-          goals: state.goals.map((goal) => (goal.goal_no.toString() === goal_no.toString() ? response.data : goal)),
+          goals: state.goals.map((goal) => (goal.id.toString() === id.toString() ? response.data : goal)),
         }));
       }
       set({ isLoading: false });

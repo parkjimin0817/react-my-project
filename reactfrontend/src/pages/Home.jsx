@@ -58,9 +58,9 @@ const Home = () => {
           <CheckLogin>아직 목표가 없어요!</CheckLogin>
         ) : (
           displayedGoals.map((goal) => (
-            <Goal key={goal.id} style={{ marginBottom: '20px' }} onClick={() => handleGoalClick(goal.id)}>
-              <GoalTitle>{goal.goalTitle} </GoalTitle>
-              <p>시작날짜 : {goal.startDate}</p>
+            <Goal key={goal.goal_no} style={{ marginBottom: '20px' }} onClick={() => handleGoalClick(goal.goal_no)}>
+              <GoalTitle>{goal.goal_title} </GoalTitle>
+              <p>시작날짜 : {goal.start_date}</p>
               <GoalFrequency>{goal.frequency}</GoalFrequency>
             </Goal>
           ))

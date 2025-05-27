@@ -1,0 +1,10 @@
+diff a/reactfrontend/src/App.jsx b/reactfrontend/src/App.jsx	(rejected hunks)
+@@ -40,7 +40,7 @@
+           <Route path="/goals" element={<MyGoals />} />
+           <Route path="/goals/create" element={<CreateGoal />} />
+           <Route path="/goals/:goal_no" element={<GoalDetail />} />
+-          <Route path="/goals/edit/:goal_no" element={<EditGoal />} />
++          <Route path="/goals/edit/:id" element={<EditGoal />} />
+         </Routes>
+       </BrowserRouter>
+     </ThemeProvider>

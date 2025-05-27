@@ -15,14 +15,14 @@ const useUserStore = create((set) => ({
       if (res.data && res.data.user_id) {
         console.log('여긴가 : ', res);
         set({ currentUser: res.data, error: null });
-        return true;
+        return { success: true };
       } else {
         set({ error: '로그인 실패 : 사용자 정보가 없습니다.', currentUser: null });
-        return false;
+        return { success: false };
       }
     } catch (error) {
       const message = error.response?.data?.message || error.message;
-      set({ error: message, currentUser: null });
+      set({ error: '에러 : ', message, currentUser: null });
       return false;
     }
   },

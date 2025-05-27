@@ -70,7 +70,7 @@ const CreateGoal = () => {
           <Label>목표 제목</Label>
           <GoalInput type="text" name="title" onChange={handleChange} />
           <Label>내용</Label>
-          <ContentInput type="text" name="content" onChange={handleChange} />
+          <ContentInput as="textarea" name="content" value={formData.content} onChange={handleChange} />
           <Label>시작날짜</Label>
           <GoalInput type="date" name="date" onChange={handleChange} />
           <Label>주기</Label>
@@ -119,9 +119,14 @@ const GoalButton = styled(Button)`
   width: 300px;
 `;
 
-const ContentInput = styled(Input)`
+const ContentInput = styled.textarea`
   width: 300px;
   height: 300px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: vertical;
 `;
 
 const Select = styled.select`

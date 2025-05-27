@@ -36,8 +36,8 @@ public class Goal {
     @Enumerated(EnumType.STRING)
     private CommonEnums.Frequency frequency;
 
-    @Column(name = "CREATE_DATE", updatable = false)
-    private LocalDateTime createDate;
+//    @Column(name = "CREATE_DATE", updatable = false)
+//    private LocalDateTime createDate;
 
     //Goal : Member (N : 1)
     @ManyToOne(fetch = FetchType.LAZY) //불필요한 연관 데이터 조회 방지

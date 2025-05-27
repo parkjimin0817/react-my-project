@@ -40,7 +40,7 @@ function App() {
           <Route path="/goals" element={<MyGoals />} />
           <Route path="/goals/create" element={<CreateGoal />} />
           <Route path="/goals/:goal_no" element={<GoalDetail />} />
-          <Route path="/goals/edit/:id" element={<EditGoal />} />
+          <Route path="/goals/edit/:goal_no" element={<EditGoal />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

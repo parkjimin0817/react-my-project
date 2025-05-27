@@ -18,8 +18,8 @@ const schema = yup.object().shape({
 });
 
 const EditGoal = () => {
-  const { id } = useParams();
-  const { getGoalById, updateGoal } = useGoalStore();
+  const { goal_no } = useParams();
+  const { getGoalByGoalNo, updateGoal } = useGoalStore();
   const { currentUser } = useUserStore();
   const navigate = useNavigate();
 
@@ -41,6 +41,8 @@ const EditGoal = () => {
   });
 
   useEffect(() => {
+    console.log('goal_no from useParams:', goal_no);
+
     if (!currentUser) {
       alert('로그인 후 이용해주세요.');
       navigate(-1);
@@ -48,46 +50,40 @@ const EditGoal = () => {
     }
 
     const fetchGoal = async () => {
-      const goal = await getGoalById(id);
+      const goal = await getGoalByGoalNo(goal_no); // 이름 수정
       if (goal) {
         reset({
-          title: goal.goalTitle,
-          content: goal.goalDescription,
-          date: goal.startDate,
+          title: goal.goal_title,
+          content: goal.goal_content,
+          date: goal.start_date,
           frequency: goal.frequency,
         });
-
-        console.log('받아온 goal:', goal);
       } else {
         alert('목표를 찾을 수 없습니다.');
         navigate('/goals');
       }
       setLoading(false);
     };
-
     fetchGoal();
-  }, [id, currentUser, navigate, getGoalById, reset]);
+  }, [goal_no, currentUser, navigate, getGoalByGoalNo, reset]);
 
   const onSubmit = async (data) => {
     const updatedGoal = {
-      goalTitle: data.title,
-      goalDescription: data.content,
-      startDate: data.date,
+      user_id: currentUser.userId,
+      goal_title: data.title,
+      goal_content: data.content,
+      start_date: data.date,
       frequency: data.frequency,
-      userId: currentUser.userId,
     };
+    const response = await updateGoal(goal_no, updatedGoal); // id → goal_no
 
-    const response = await updateGoal(id, updatedGoal);
-
-    if (response && response.id) {
+    if (response && response.goal_no) {
       alert('목표 수정 완료!');
-      navigate(`/goals/${response.id}`);
+      navigate(`/goals/${response.goal_no}`);
     } else {
       alert('수정 중 오류가 발생했습니다.');
     }
   };
-
-  if (loading) return <Wrapper>Loading...</Wrapper>;
 
   return (
     <Wrapper>
@@ -99,7 +95,7 @@ const EditGoal = () => {
         {errors.title && <ErrorMsg>{errors.title.message}</ErrorMsg>}
 
         <Label>내용</Label>
-        <ContentInput type="text" {...register('content')} />
+        <ContentInput {...register('content')} />
         {errors.content && <ErrorMsg>{errors.content.message}</ErrorMsg>}
 
         <Label>시작날짜</Label>
@@ -156,9 +152,14 @@ const GoalInput = styled(Input)`
   width: 300px;
 `;
 
-const ContentInput = styled(Input)`
+const ContentInput = styled.textarea`
   width: 300px;
   height: 300px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  resize: vertical; /* 높이 조절 가능 */
 `;
 
 const GoalButton = styled(Button)`

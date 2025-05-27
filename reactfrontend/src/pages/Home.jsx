@@ -10,7 +10,7 @@ import useUserStore from '../store/UserStore';
 
 const Home = () => {
   const { getPosts, posts, isLoading: postsLoading, error: postsError } = usePostStore((state) => state);
-  const { getGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
+  const { getMyGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
   const { currentUser } = useUserStore();
   const navigate = useNavigate();
 
@@ -20,37 +20,35 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUser) {
-      getGoals(currentUser.userId);
+      getMyGoals(currentUser.user_id);
     }
-  }, []);
+  }, [currentUser]);
 
   const handlePostClick = (postId) => {
     navigate(`/posts/${postId}`);
   };
 
-  const handleGoalClick = (goalId) => {
-    navigate(`/goals/${goalId}`);
+  const handleGoalClick = (goal_no) => {
+    navigate(`/goals/${goal_no}`);
   };
 
-  if (postsLoading) return <Loader />;
-  if (postsError) return <p>에러aa 발생: {postsError}</p>;
-
-  if (goalsLoading) return <Loader />;
-  if (goalsError) return <p>에러 발생: {goalsError}</p>;
-
   const displayedPosts = posts.slice(0, 3);
-  const displayedGoals = goals.filter((goal) => goal.userId && goal.userId === currentUser.userId).slice(0, 3);
+  const displayedGoals = goals.filter((goal) => goal.user_id && goal.user_id === currentUser.user_id).slice(0, 3);
 
   return (
     <Wrapper>
       <Div>
         <HomeSectionTitle>오늘의 게시글</HomeSectionTitle>
-        {displayedPosts.map((post) => (
-          <Post key={post.id} style={{ marginBottom: '20px' }} onClick={() => handlePostClick(post.id)}>
-            <p>{post.title}</p>
-            {post.img && <img src={post.img} alt="post" style={{ width: '200px', height: '200px' }} />}
-          </Post>
-        ))}
+        {displayedPosts.length === 0 ? (
+          <CheckLogin>게시글이 없어요!</CheckLogin>
+        ) : (
+          displayedPosts.map((post) => (
+            <Post key={post.id} style={{ marginBottom: '20px' }} onClick={() => handlePostClick(post.id)}>
+              <p>{post.title}</p>
+              {post.img && <img src={post.img} alt="post" style={{ width: '200px', height: '200px' }} />}
+            </Post>
+          ))
+        )}
       </Div>
       <Div>
         <HomeSectionTitle>나의 목표</HomeSectionTitle>

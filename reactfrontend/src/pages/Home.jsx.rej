@@ -1,0 +1,10 @@
+diff a/reactfrontend/src/pages/Home.jsx b/reactfrontend/src/pages/Home.jsx	(rejected hunks)
+@@ -10,7 +10,7 @@
+ 
+ const Home = () => {
+   const { getPosts, posts, isLoading: postsLoading, error: postsError } = usePostStore((state) => state);
+-  const { getMyGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
++  const { getGoals, goals, isLoading: goalsLoading, error: goalsError } = useGoalStore();
+   const { currentUser } = useUserStore();
+   const navigate = useNavigate();
+ 
